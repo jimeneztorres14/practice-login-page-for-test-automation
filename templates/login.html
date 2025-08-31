@@ -1,0 +1,48 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test Login | Practice Test Automation (Clone)</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+    <h1 class="page-title">Test Login Page</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div id="flash" class="flash">
+          {% for category, message in messages %}
+            <p class="flash-{{category}}">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <section class="card">
+      <form id="loginForm" method="post" action="" novalidate>
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" required data-test="username-input" />
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required data-test="password-input" />
+
+        <button id="submit" type="submit" data-test="login-button">Submit</button>
+
+        {% if error %}
+          <div id="error" class="error" role="alert" data-test="error-message">{{ error }}</div>
+        {% endif %}
+      </form>
+
+      <div class="hint">
+        <p><strong>Use next credentials to execute Login:</strong></p>
+        <ul>
+          <li>Username: <code>student</code></li>
+          <li>Password: <code>Password123</code></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
