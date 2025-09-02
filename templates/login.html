@@ -36,10 +36,37 @@
       </form>
 
       <div class="hint">
-        <p><strong>Use next credentials to execute Login:</strong></p>
+        <br>
+        <hr>
+        <p><strong>Test case 1: Positive LogIn test</strong></p>
         <ul>
-          <li>Username: <code>student</code></li>
-          <li>Password: <code>Password123</code></li>
+          <li>Open page</li>
+          <li>Type username <strong>student</strong> into Username field</li>
+          <li>Type password <strong>Password123</strong> into Password field</li>
+          <li>Push <strong>Submit</strong> button</li>
+          <li>Verify new page URL contains <strong>practicetestautomation.com/logged-in-successfully/</strong></li>
+          <li>Verify new page contains expected text (<code>'Congratulations'</code> or <code>'Successfully' logged in</code>)</li>
+          <li>Verify button <strong>Log out</strong> is displayed on the new page</li>
+        </ul>
+        <hr>
+        <p><strong>Test case 2: Negative username test</strong></p>
+        <ul>
+          <li>Open page</li>
+          <li>Type username <code>incorrectUser</code> into <strong>Username</strong> field</li>
+          <li>Type password <code>Password123</code> into <strong>Password</strong> field</li>
+          <li>Push <strong>Submit</strong> button</li>
+          <li>Verify error message is displayed</li>
+          <li>Verify error message text is <strong>Your username is invalid!</strong></li>
+        </ul>
+        <hr>
+        <p><strong>Test case 3: Negative password test</strong></p>
+        <ul>
+          <li>Open page</li>
+          <li>Type username <code>student</code> into <strong>Username</strong> field</li>
+          <li>Type password <code>incorrectPassword</code> into <strong>Password</strong> field</li>
+          <li>Push <strong>Submit</strong> button</li>
+          <li>Verify error message is displayed</li>
+          <li>Verify error message text is <strong>Your password is invalid!</strong></li>
         </ul>
       </div>
     </section>
