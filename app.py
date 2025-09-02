@@ -1,9 +1,9 @@
-
+import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from datetime import timedelta
 
 app = Flask(__name__)
-app.secret_key = "pta-clone-demo-secret"
+app.secret_key = os.environ.get("SECRET_KEY", "pta-clone-demo-secret")  # use env var in Render
 app.permanent_session_lifetime = timedelta(minutes=30)
 
 VALID_USERNAME = "student"
@@ -19,7 +19,6 @@ def login():
     if request.method == "POST":
         username = request.form.get("username", "")
         password = request.form.get("password", "")
-        # Simple validation flow mirroring the original site's behavior
         if username != VALID_USERNAME:
             error = "Your username is invalid!"
         elif password != VALID_PASSWORD:
@@ -33,7 +32,6 @@ def login():
 @app.route("/logged-in-successfully/")
 def logged_in_successfully():
     if not session.get("logged_in"):
-        # if user isn't logged in, bounce back to login
         return redirect(url_for("login"))
     return render_template("success.html", username=session.get("username", "student"))
 
@@ -44,4 +42,5 @@ def logout():
     return redirect(url_for("login"))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    port = int(os.environ.get("PORT", 8000))  # Render provides PORT
+    app.run(host="0.0.0.0", port=port, debug=False)
