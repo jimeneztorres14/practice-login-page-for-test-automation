@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkboxes & Radios | Practice Test Automation (Clone)</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+    <h1 class="page-title">Checkboxes & Radio Buttons</h1>
+
+    <section class="card">
+      <form id="preferencesForm">
+        <h2>Notification Preferences</h2>
+
+        <p>Select one or more channels:</p>
+        <label>
+          <input
+            type="checkbox"
+            id="email-checkbox"
+            name="notifications"
+            value="email"
+            data-test="checkbox-email"
+          />
+          Email notifications
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            id="sms-checkbox"
+            name="notifications"
+            value="sms"
+            data-test="checkbox-sms"
+          />
+          SMS notifications
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            id="push-checkbox"
+            name="notifications"
+            value="push"
+            data-test="checkbox-push"
+          />
+          Push notifications
+        </label>
+
+        <hr style="margin-top: 1.5rem; margin-bottom: 1rem;">
+
+        <h2>Preferred Contact Method</h2>
+
+        <p>Choose exactly one:</p>
+        <label>
+          <input
+            type="radio"
+            id="contact-email"
+            name="contact_method"
+            value="email"
+            data-test="radio-email"
+          />
+          Email
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            id="contact-phone"
+            name="contact_method"
+            value="phone"
+            data-test="radio-phone"
+          />
+          Phone call
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            id="contact-whatsapp"
+            name="contact_method"
+            value="whatsapp"
+            data-test="radio-whatsapp"
+          />
+          WhatsApp
+        </label>
+
+        <button
+          type="button"
+          id="previewSelection"
+          data-test="preview-button"
+        >
+          Preview selection (no submit)
+        </button>
+
+        <div
+          id="selectionResult"
+          class="hint"
+          style="margin-top: 1rem;"
+          data-test="selection-result"
+        >
+          Click "Preview selection" to see what you chose.
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // Simple JS to show current selection (helps with UI assertions)
+    document.addEventListener("DOMContentLoaded", function () {
+      const previewButton = document.getElementById("previewSelection");
+      const result = document.getElementById("selectionResult");
+
+      previewButton.addEventListener("click", function () {
+        const checkedBoxes = Array.from(
+          document.querySelectorAll('input[name="notifications"]:checked')
+        ).map(cb => cb.value);
+
+        const selectedRadio = document.querySelector(
+          'input[name="contact_method"]:checked'
+        );
+
+        let text = "";
+
+        if (checkedBoxes.length === 0) {
+          text += "No notification channels selected. ";
+        } else {
+          text += "Notifications: " + checkedBoxes.join(", ") + ". ";
+        }
+
+        if (!selectedRadio) {
+          text += "No preferred contact method chosen.";
+        } else {
+          text += "Preferred contact method: " + selectedRadio.value + ".";
+        }
+
+        result.textContent = text;
+      });
+    });
+  </script>
+</body>
+</html>

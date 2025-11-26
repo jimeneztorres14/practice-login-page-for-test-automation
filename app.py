@@ -29,6 +29,10 @@ def login():
             return redirect(url_for("logged_in_successfully"))
     return render_template("login.html", error=error)
 
+@app.route("/checkboxes/")
+def checkboxes():
+    return render_template("checkboxes.html")
+
 @app.route("/logged-in-successfully/")
 def logged_in_successfully():
     if not session.get("logged_in"):
