@@ -10,8 +10,8 @@ VALID_USERNAME = "student"
 VALID_PASSWORD = "Password123"
 
 @app.route("/")
-def root():
-    return redirect(url_for("login"))
+def home():
+    return render_template("home.html")
 
 @app.route("/practice-test-login/", methods=["GET", "POST"])
 def login():

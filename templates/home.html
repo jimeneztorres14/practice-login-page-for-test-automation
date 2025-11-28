@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test Automation Playground | Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+    <h1 class="page-title">Test Automation Playground</h1>
+    <section class="card">
+      <p>
+        Welcome! This project is a small playground inspired by
+        <em>the-internet</em> where you can practice UI test automation
+        with Selenium and Java.
+      </p>
+      <p class="hint">
+        Use the cards below to open individual test pages. Each page is focused
+        on a specific type of UI interaction (login, checkboxes, etc.) and can
+        be automated independently.
+      </p>
+
+      <div class="grid">
+
+        <!-- Login page -->
+        <article class="nav-card" data-test="nav-login">
+          <div>
+            <h2>Login Page</h2>
+            <span class="tag">Authentication</span>
+            <p>
+              Classic username/password login form with positive and negative
+              scenarios, error messages, and a protected success page.
+            </p>
+          </div>
+          <a
+            href="{{ url_for('login') }}"
+            class="nav-link-btn"
+          >
+            Go to Login page
+          </a>
+        </article>
+
+        <!-- Checkboxes & radios page -->
+        <article class="nav-card" data-test="nav-checkboxes">
+          <div>
+            <h2>Checkboxes &amp; Radio Buttons</h2>
+            <span class="tag">Form controls</span>
+            <p>
+              Practice selecting and unselecting checkboxes, working with radio
+              groups, and verifying UI state in your automated tests.
+            </p>
+          </div>
+          <a
+            href="{{ url_for('checkboxes') }}"
+            class="nav-link-btn"
+          >
+            Go to Checkboxes page
+          </a>
+        </article>
+
+        <!-- Placeholder cards for future pages -->
+        <article class="nav-card" data-test="nav-dynamic-loading">
+          <div>
+            <h2>Dynamic Loading</h2>
+            <span class="tag">Coming soon</span>
+            <p>
+              A page where content appears after a delay. Perfect for practicing
+              explicit waits in Selenium.
+            </p>
+          </div>
+          <span class="nav-link-btn" style="background:#9ca3af; cursor:default;">
+            Coming soon
+          </span>
+        </article>
+
+        <article class="nav-card" data-test="nav-file-upload">
+          <div>
+            <h2>File Upload</h2>
+            <span class="tag">Coming soon</span>
+            <p>
+              A simple file upload flow for testing file selection and
+              upload validations.
+            </p>
+          </div>
+          <span class="nav-link-btn" style="background:#9ca3af; cursor:default;">
+            Coming soon
+          </span>
+        </article>
+
+        <article class="nav-card" data-test="nav-alerts">
+          <div>
+            <h2>Alerts &amp; Modals</h2>
+            <span class="tag">Coming soon</span>
+            <p>
+              JavaScript alerts, confirms, prompts, and modals for practicing
+              window/alert handling.
+            </p>
+          </div>
+          <span class="nav-link-btn" style="background:#9ca3af; cursor:default;">
+            Coming soon
+          </span>
+        </article>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>

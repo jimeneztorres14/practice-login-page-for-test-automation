@@ -9,6 +9,7 @@
 </head>
 <body>
   <main class="container">
+    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">← Back to Home</a>
     <h1 class="page-title">Test Login Page</h1>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -19,7 +20,6 @@
         </div>
       {% endif %}
     {% endwith %}
-
     <section class="card">
       <form id="loginForm" method="post" action="" novalidate>
         <label for="username">Username</label>
