@@ -59,35 +59,33 @@
           </a>
         </article>
 
-        <!-- Placeholder cards for future pages -->
         <article class="nav-card" data-test="nav-dynamic-loading">
           <div>
             <h2>Dynamic Loading</h2>
-            <span class="tag">Coming soon</span>
+            <span class="tag">Waits</span>
             <p>
-              A page where content appears after a delay. Perfect for practicing
-              explicit waits in Selenium.
+              Content appears after a delay. Perfect for practicing explicit waits.
             </p>
           </div>
-          <span class="nav-link-btn" style="background:#9ca3af; cursor:default;">
-            Coming soon
-          </span>
+          <a href="{{ url_for('dynamic_loading') }}" class="nav-link-btn">
+            Go to Dynamic Loading
+          </a>
         </article>
 
         <article class="nav-card" data-test="nav-file-upload">
           <div>
             <h2>File Upload</h2>
-            <span class="tag">Coming soon</span>
+            <span class="tag">Files</span>
             <p>
-              A simple file upload flow for testing file selection and
-              upload validations.
+              Upload a file and verify success or validation errors.
             </p>
           </div>
-          <span class="nav-link-btn" style="background:#9ca3af; cursor:default;">
-            Coming soon
-          </span>
+          <a href="{{ url_for('file_upload') }}" class="nav-link-btn">
+            Go to File Upload
+          </a>
         </article>
 
+        <!-- Placeholder cards for future pages -->
         <article class="nav-card" data-test="nav-alerts">
           <div>
             <h2>Alerts &amp; Modals</h2>

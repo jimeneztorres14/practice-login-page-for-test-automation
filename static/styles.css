@@ -149,3 +149,49 @@ button:hover { opacity: 0.92; }
   color: #1d4ed8;
   font-weight: 500;
 }
+
+/* ============================
+   Dynamic Loading
+   ============================ */
+
+.loading-box {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #f3f4f6;
+  text-align: center;
+  min-height: 80px;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #111827;
+  margin: 0 auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-message {
+  margin-top: 0.75rem;
+  font-weight: 600;
+}
+
+/* ============================
+   File Upload
+   ============================ */
+
+.file-input {
+  margin-top: 0.5rem;
+}
+
+.upload-status {
+  margin-top: 1rem;
+}

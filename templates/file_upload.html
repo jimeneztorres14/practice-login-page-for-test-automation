@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>File Upload | Test Automation Playground</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">
+      ← Back to Home
+    </a>
+    <h1 class="page-title">File Upload</h1>
+    <section class="card">
+      <p>
+        Use this page to practice uploading files with Selenium. The server
+        validates the file type but does not actually save the file.
+      </p>
+
+      <form
+        id="fileUploadForm"
+        method="post"
+        enctype="multipart/form-data"
+        data-test="file-upload-form"
+      >
+        <label for="file">
+          Choose a file to upload
+        </label>
+        <input
+          id="file"
+          name="file"
+          type="file"
+          class="file-input"
+          data-test="file-input"
+        />
+
+        <button
+          type="submit"
+          id="uploadButton"
+          data-test="upload-button"
+        >
+          Upload file
+        </button>
+      </form>
+
+      <div class="upload-status">
+        {% if upload_error %}
+          <div
+            class="error"
+            role="alert"
+            data-test="upload-error"
+          >
+            {{ upload_error }}
+          </div>
+        {% elif upload_success %}
+          <div
+            class="success"
+            role="status"
+            data-test="upload-success"
+          >
+            {{ upload_success }}
+          </div>
+        {% else %}
+          <p class="hint" data-test="upload-hint">
+            Allowed file types: <code>.txt</code>, <code>.png</code>,
+            <code>.jpg</code>, <code>.jpeg</code>, <code>.pdf</code>.
+          </p>
+        {% endif %}
+      </div>
+
+      {% if filename %}
+        <p class="hint" data-test="uploaded-filename">
+          Last uploaded file name: <strong>{{ filename }}</strong>
+        </p>
+      {% endif %}
+
+    </section>
+  </main>
+</body>
+</html>

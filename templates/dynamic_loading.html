@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dynamic Loading | Test Automation Playground</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">
+      ← Back to Home
+    </a>
+    <h1 class="page-title">Dynamic Loading</h1>
+    <section class="card">
+      <p>
+        This page demonstrates content that appears after a short delay.
+        Use it to practice explicit waits in Selenium.
+      </p>
+
+      <button
+        id="startLoading"
+        type="button"
+        data-test="start-loading-button"
+      >
+        Start loading
+      </button>
+
+      <div
+        id="loadingBox"
+        class="loading-box"
+        data-test="loading-box"
+      >
+        <div
+          id="spinner"
+          class="loading-spinner"
+          aria-hidden="true"
+          data-test="loading-spinner"
+          style="display: none;"
+        ></div>
+
+        <p
+          id="loadingMessage"
+          class="loading-message"
+          data-test="loading-message"
+        >
+          Click "Start loading" to load the secret message.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const btn = document.getElementById("startLoading");
+      const spinner = document.getElementById("spinner");
+      const message = document.getElementById("loadingMessage");
+
+      btn.addEventListener("click", function () {
+        btn.disabled = true;
+        spinner.style.display = "block";
+        message.textContent = "Loading, please wait...";
+
+        setTimeout(function () {
+          spinner.style.display = "none";
+          message.textContent = "Hello World! The content has finished loading.";
+          btn.disabled = false;
+        }, 3000);
+      });
+    });
+  </script>
+</body>
+</html>
