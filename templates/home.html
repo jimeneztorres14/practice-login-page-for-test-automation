@@ -13,8 +13,9 @@
 
     <section class="card">
       <p>
-        Welcome! This project is a mini playground inspired by <strong>the-internet</strong>,
-        designed to help you practice UI test automation using Selenium &amp; Java.
+        Welcome! This project is a UI Testing Playground inspired by the well-known
+        “the-internet” project. It contains 10 interactive pages designed to help you
+        practice and strengthen your Selenium WebDriver automation skills using Python.
       </p>
 
       <p class="hint">
@@ -24,18 +25,18 @@
 
       <div class="grid">
 
-        <!-- Form Validation (COMING SOON until we add i) -->
+        <!-- Form Validation -->
         <article class="nav-card" data-test="nav-form-validation">
           <div>
             <h2>Form Validation</h2>
-            <span class="tag">Coming Soon</span>
+            <span class="tag">Forms</span>
             <p>
-              Full form with required fields, email/phone validation, and negative tests.
+              A full validation form with errors, required fields, and negative test scenarios.
             </p>
           </div>
-          <span class="nav-link-btn" style="background: #9ca3af; cursor: default;">
-            Coming Soon
-          </span>
+          <a href="{{ url_for('form_validation') }}" class="nav-link-btn">
+            Go to Form Validation
+          </a>
         </article>
 
         <!-- Login Page -->
@@ -45,25 +46,11 @@
             <span class="tag">Authentication</span>
             <p>
               Classic login flow with valid &amp; invalid tests, error messages,
-              and a protected secure page.
+              and secure page.
             </p>
           </div>
           <a href="{{ url_for('login') }}" class="nav-link-btn">
             Go to Login Page
-          </a>
-        </article>
-
-        <!-- Checkboxes & Radios -->
-        <article class="nav-card" data-test="nav-checkboxes">
-          <div>
-            <h2>Checkboxes &amp; Radio Buttons</h2>
-            <span class="tag">Form Controls</span>
-            <p>
-              Practice toggling checkboxes, selecting radio groups, and verifying UI state.
-            </p>
-          </div>
-          <a href="{{ url_for('checkboxes') }}" class="nav-link-btn">
-            Go to Checkboxes Page
           </a>
         </article>
 
@@ -77,7 +64,7 @@
             </p>
           </div>
           <a href="{{ url_for('dynamic_loading') }}" class="nav-link-btn">
-            Go to Dynamic Loading Page
+            Go to Dynamic Loading
           </a>
         </article>
 
@@ -91,7 +78,7 @@
             </p>
           </div>
           <a href="{{ url_for('file_upload') }}" class="nav-link-btn">
-            Go to File Upload Page
+            Go to File Upload
           </a>
         </article>
 
@@ -109,17 +96,60 @@
           </a>
         </article>
 
+        <!-- Dropdowns -->
+        <article class="nav-card" data-test="nav-dropdowns">
+          <div>
+            <h2>Dropdowns</h2>
+            <span class="tag">Select Menus</span>
+            <p>
+              Practice selecting simple and dependent dropdowns using Selenium's Select class.
+            </p>
+          </div>
+          <a href="{{ url_for('dropdowns') }}" class="nav-link-btn">
+            Go to Dropdowns Page
+          </a>
+        </article>
+
         <!-- Sortable/Searchable Table -->
         <article class="nav-card" data-test="nav-tables">
           <div>
-            <h2>Sortable Table</h2>
+            <h2>Sortable/Searchable Table</h2>
             <span class="tag">Data</span>
             <p>
-              Sort rows by columns and filter with the search bar. Great for list &amp; DOM validation tests.
+              Sort rows by columns and filter with the search bar. Great for list &amp; DOM validation.
             </p>
           </div>
           <a href="{{ url_for('tables') }}" class="nav-link-btn">
             Go to Table Page
+          </a>
+        </article>
+
+        <!-- Checkboxes & Radios -->
+        <article class="nav-card" data-test="nav-checkboxes">
+          <div>
+            <h2>Checkboxes &amp; Radio Buttons</h2>
+            <span class="tag">Form Controls</span>
+            <p>
+              Practice toggling checkboxes, selecting radio groups, and verifying UI state.
+            </p>
+          </div>
+          <a href="{{ url_for('checkboxes') }}" class="nav-link-btn">
+            Go to Checkboxes
+          </a>
+        </article>
+
+
+        <!-- Hover / Mouse Actions -->
+        <article class="nav-card" data-test="nav-hover">
+          <div>
+            <h2>Hover &amp; Mouse Actions</h2>
+            <span class="tag">Mouse Actions</span>
+            <p>
+              Hover on boxes to reveal hidden messages and the different background colors.
+            </p>
+          </div>
+          <a href="{{ url_for('hover') }}" class="nav-link-btn">
+            Go to Hover Page
           </a>
         </article>
 
@@ -137,23 +167,12 @@
           </a>
         </article>
 
-        <!-- Hover / Mouse Actions (COMING SOON) -->
-        <article class="nav-card" data-test="nav-hover">
-          <div>
-            <h2>Hover &amp; Mouse Actions</h2>
-            <span class="tag">Coming Soon</span>
-            <p>
-              Hover to reveal text, tooltips, and advanced mouse actions.
-            </p>
-          </div>
-          <span class="nav-link-btn" style="background: #9ca3af; cursor: default;">
-            Coming Soon
-          </span>
-        </article>
 
       </div>
     </section>
   </main>
-
+  <footer class="footer">
+    <p>Created by Ruben Jimenez — {{ current_year }}</p>
+  </footer>
 </body>
 </html>

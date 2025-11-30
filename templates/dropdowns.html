@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dropdowns | Test Automation Playground</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+    <main class="container">
+        
+        <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">
+        ← Back to Home
+        </a>
+
+        <h1 class="page-title">Dropdowns</h1>
+
+        <section class="card">
+        <p>
+            This page includes a simple dropdown and a dependent dropdown (State/Province based on selected Country).
+            Use it to practice Selenium’s <code>Select</code> class and dynamic updates.
+        </p>
+
+        <!-- Simple Dropdown -->
+        <label for="countryDropdown"><strong>Select a Country</strong></label>
+        <select id="countryDropdown" data-test="country-dropdown">
+            <option value="" disabled selected>Select country...</option>
+            {% for country in countries.keys() %}
+            <option value="{{ country }}">{{ country }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Dependent Dropdown -->
+        <label for="stateDropdown" style="margin-top: 1rem;">
+            <strong>Select a State/Province</strong>
+        </label>
+        <select id="stateDropdown" data-test="state-dropdown" disabled>
+            <option value="" selected>Select a country first...</option>
+        </select>
+
+        <p id="dropdownResult" class="hint" data-test="dropdown-result" style="margin-top: 1rem;">
+            Choose a country and state to see the result.
+        </p>
+
+        <button id="showSelection" data-test="show-selection-btn">
+            Show selection
+        </button>
+
+        </section>
+
+    </main>
+    <script 
+        id="countries-json" type="application/json">
+    {{ countries | tojson }}
+    </script>
+
+    <script>
+
+    const countriesData = JSON.parse(
+        document.getElementById("countries-json").textContent
+    );
+
+    const countryDropdown = document.getElementById("countryDropdown");
+    const stateDropdown = document.getElementById("stateDropdown");
+    const result = document.getElementById("dropdownResult");
+
+    countryDropdown.addEventListener("change", function () {
+        const selectedCountry = this.value;
+        const states = countriesData[selectedCountry];
+
+        stateDropdown.innerHTML = "";
+        stateDropdown.disabled = false;
+
+        states.forEach(state => {
+        const option = document.createElement("option");
+        option.value = state;
+        option.textContent = state;
+        stateDropdown.appendChild(option);
+        });
+    });
+
+    document.getElementById("showSelection").addEventListener("click", function () {
+        const country = countryDropdown.value;
+        const state = stateDropdown.value;
+
+        if (!country || !state) {
+        result.textContent = "Please choose both country and state.";
+        } else {
+        result.textContent = `You selected: ${country} → ${state}`;
+        }
+    });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hover & Mouse Actions | Test Automation Playground</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+
+    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">
+      ← Back to Home
+    </a>
+
+    <h1 class="page-title">Hover & Mouse Actions</h1>
+
+    <section class="card">
+      <p>
+        Hover over each box to reveal the hidden text.
+      </p>
+
+      <div class="hover-grid">
+
+        <div class="hover-box" data-test="hover-box-1">
+          <div class="hover-content" data-test="hover-content-1" id="hover-box-1">
+            Hidden message #1  
+          </div>
+        </div>
+
+        <div class="hover-box" data-test="hover-box-2">
+          <div class="hover-content" data-test="hover-content-2" id="hover-box-2">
+            Secret message #2  
+          </div>
+        </div>
+
+        <div class="hover-box" data-test="hover-box-3">
+          <div class="hover-content" data-test="hover-content-3" id="hover-box-3">
+            Surprise message #3  
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+</body>
+</html>

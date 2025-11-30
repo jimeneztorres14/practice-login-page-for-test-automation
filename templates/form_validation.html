@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form Validation | Test Automation Playground</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+
+  <main class="container">
+
+    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">
+      ← Back to Home
+    </a>
+
+    <h1 class="page-title">Form Validation</h1>
+
+    <section class="card">
+      <p>
+        Fill out the form below. Try submitting incomplete or invalid data to test validation rules.
+        Great for negative test cases in Selenium.
+      </p>
+
+      <form method="POST" id="validationForm" data-test="validation-form">
+
+        <!-- NAME -->
+        <label for="name">Full Name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          placeholder="John Doe"
+          data-test="input-name"
+        />
+        {% if errors.get("name") %}
+          <div class="error" data-test="error-name">{{ errors["name"] }}</div>
+        {% endif %}
+
+        <!-- EMAIL -->
+        <label for="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="text"
+          placeholder="example@email.com"
+          data-test="input-email"
+        />
+        {% if errors.get("email") %}
+          <div class="error" data-test="error-email">{{ errors["email"] }}</div>
+        {% endif %}
+
+        <!-- PHONE -->
+        <label for="phone">Phone Number</label>
+        <input
+          id="phone"
+          name="phone"
+          type="text"
+          placeholder="1234567890"
+          data-test="input-phone"
+        />
+        {% if errors.get("phone") %}
+          <div class="error" data-test="error-phone">{{ errors["phone"] }}</div>
+        {% endif %}
+
+        <!-- PASSWORD -->
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="At least 8 characters"
+          data-test="input-password"
+        />
+        {% if errors.get("password") %}
+          <div class="error" data-test="error-password">{{ errors["password"] }}</div>
+        {% endif %}
+
+        <!-- CONFIRM PASSWORD -->
+        <label for="confirm_password">Confirm Password</label>
+        <input
+          id="confirm_password"
+          name="confirm_password"
+          type="password"
+          placeholder="Retype your password"
+          data-test="input-confirm-password"
+        />
+        {% if errors.get("confirm_password") %}
+          <div class="error" data-test="error-confirm-password">
+            {{ errors["confirm_password"] }}
+          </div>
+        {% endif %}
+
+        <button type="submit" data-test="submit-button">
+          Submit Form
+        </button>
+      </form>
+
+      {% if success_message %}
+        <div class="success" style="margin-top: 1rem;" data-test="success-message">
+          {{ success_message }}
+        </div>
+      {% endif %}
+
+    </section>
+
+  </main>
+
+</body>
+</html>

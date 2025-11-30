@@ -7,7 +7,7 @@ body {
   color: #1f2937;
 }
 .container {
-  max-width: 680px;
+  max-width: 760px;
   margin: 5rem auto;
   padding: 0 1rem;
 }
@@ -20,6 +20,7 @@ body {
   border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  text-align: justify;
 }
 label {
   display: block;
@@ -97,6 +98,7 @@ button:hover { opacity: 0.92; }
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
   margin-top: 1.5rem;
+  text-align: center;
 }
 
 .nav-card {
@@ -148,6 +150,14 @@ button:hover { opacity: 0.92; }
   background: #eff6ff;
   color: #1d4ed8;
   font-weight: 500;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  color: #6b7280; /* gray-500 */
 }
 
 /* ============================
@@ -299,4 +309,61 @@ button:hover { opacity: 0.92; }
   font-size: 0.75rem;
   opacity: 0.7;
   margin-left: 0.25rem;
+}
+
+
+/* ============================
+   Hover & Mouse Actions
+   ============================ */
+
+.hover-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.hover-box {
+  height: 140px;
+  background: #e5e7eb;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.hover-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+
+  background: rgba(17, 24, 39, 0.85);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* Reveal on hover */
+.hover-box:hover .hover-content {
+  opacity: 1;
+}
+
+#hover-box-1 {
+  background: green;
+}
+
+#hover-box-2 {
+  background: blue;
+}
+
+#hover-box-3 {
+  background: red;
 }

@@ -9,13 +9,12 @@
 </head>
 <body>
   <main class="container">
-    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">← Back to Home</a>
     <h1 class="page-title">Logged In Successfully</h1>
     <article class="card success">
       <p id="successMessage" data-test="success-message">
         Congratulations {{ username }}! You logged into a secure area!
       </p>
-      <a id="logout" class="logout" href="{{ url_for('logout') }}" data-test="logout-button">Log out</a>
+      <a class="back-btn" class="logout" href="{{ url_for('logout') }}" data-test="logout-button">Log out</a>
     </article>
   </main>
 </body>

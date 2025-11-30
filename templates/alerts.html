@@ -8,6 +8,10 @@
 </head>
 <body>
   <main class="container">
+    
+    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">
+      ← Back to Home
+    </a>
     <h1 class="page-title">Alerts &amp; Modals</h1>
 
     <section class="card">
@@ -65,12 +69,6 @@
         </p>
       </div>
     </section>
-
-    <!-- Back button -->
-    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">
-      ← Back to Home
-    </a>
-
     <!-- Modal markup -->
     <div
       id="modalOverlay"
@@ -141,7 +139,7 @@
         result.textContent = "Modal was closed.";
       });
 
-      // Optional: click outside modal to close
+      // Click outside modal to close
       overlay.addEventListener("click", function (event) {
         if (event.target === overlay) {
           overlay.style.display = "none";

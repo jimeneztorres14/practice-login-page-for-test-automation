@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from werkzeug.utils import secure_filename
-from datetime import timedelta
+from datetime import timedelta, datetime
 import os
 
 app = Flask(__name__)
@@ -16,7 +16,54 @@ def allowed_file(filename: str) -> bool:
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    current_year = datetime.now().year
+    return render_template("home.html", current_year=current_year)
+
+@app.route("/form-validation/", methods=["GET", "POST"])
+def form_validation():
+    errors = {}
+    success_message = None
+
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip()
+        phone = request.form.get("phone", "").strip()
+        password = request.form.get("password", "")
+        confirm_password = request.form.get("confirm_password", "")
+
+        # Name validation
+        if not name:
+            errors["name"] = "Name is required."
+
+        # Email validation
+        if not email:
+            errors["email"] = "Email is required."
+        elif "@" not in email or "." not in email:
+            errors["email"] = "Enter a valid email address."
+
+        # Phone validation (simple numeric check)
+        if not phone:
+            errors["phone"] = "Phone number is required."
+        elif not phone.isdigit():
+            errors["phone"] = "Phone number must contain only digits."
+
+        # Password validation
+        if len(password) < 8:
+            errors["password"] = "Password must be at least 8 characters long."
+
+        # Confirm password
+        if password != confirm_password:
+            errors["confirm_password"] = "Passwords do not match."
+
+        # If no errors → success
+        if not errors:
+            success_message = "Form submitted successfully!"
+    
+    return render_template(
+        "form_validation.html",
+        errors=errors,
+        success_message=success_message
+    )
 
 @app.route("/practice-test-login/", methods=["GET", "POST"])
 def login():
@@ -100,6 +147,18 @@ def tables():
 def iframe():
     return render_template("iframe.html")
 
+@app.route("/dropdowns/")
+def dropdowns():
+    countries = {
+        "USA": ["New York", "California", "Texas", "Florida"],
+        "Canada": ["Ontario", "Quebec", "Alberta", "British Columbia"],
+        "Mexico": ["CDMX", "Jalisco", "Nuevo León"],
+    }
+    return render_template("dropdowns.html", countries=countries)
+
+@app.route("/hover/")
+def hover():
+    return render_template("hover.html")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
