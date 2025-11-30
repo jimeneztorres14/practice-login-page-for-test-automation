@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Iframe Interaction | Test Automation Playground</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">
+      ← Back to Home
+    </a>
+
+    <h1 class="page-title">Iframe Interaction</h1>
+
+    <section class="card">
+      <p>
+        This page contains an iframe with a textarea inside it.
+        Switch into the iframe, type text, and verify it appears correctly.
+      </p>
+
+      <iframe
+        id="editorFrame"
+        srcdoc="
+          <html>
+          <body style='font-family: system-ui; padding: 1rem;'>
+            <h3>Iframe Text Editor</h3>
+            <textarea
+              id='iframeText'
+              data-test='iframe-textarea'
+              style='width: 100%; height: 120px; padding: 0.5rem; font-size: 1rem;'
+              placeholder='Type inside the iframe...'
+            ></textarea>
+          </body>
+          </html>
+        "
+        data-test="iframe"
+        style="width: 100%; height: 260px; border-radius: 16px; border: 1px solid #ccc; margin-top: 1rem;"
+      ></iframe>
+
+    </section>
+
+  </main>
+</body>
+</html>

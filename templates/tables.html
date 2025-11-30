@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sortable Table | Test Automation Playground</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">
+      ← Back to Home
+    </a>
+    <h1 class="page-title">Sortable &amp; Searchable Table</h1>
+
+    <section class="card">
+      <p>
+        This table allows you to practice verifying row data, sorting by
+        columns, and filtering with a search box in your automated tests.
+      </p>
+
+      <label for="tableSearch">Search by name or email</label>
+      <input
+        id="tableSearch"
+        type="text"
+        placeholder="Type to filter rows..."
+        data-test="table-search-input"
+      />
+
+      <div class="table-wrapper">
+        <table class="data-table" data-test="users-table">
+          <thead>
+            <tr>
+              <th data-sort-key="name" data-test="header-name">
+                Name
+                <span class="sort-indicator" data-test="sort-indicator-name">↕</span>
+              </th>
+              <th data-sort-key="email" data-test="header-email">
+                Email
+                <span class="sort-indicator" data-test="sort-indicator-email">↕</span>
+              </th>
+              <th data-sort-key="role" data-test="header-role">
+                Role
+                <span class="sort-indicator" data-test="sort-indicator-role">↕</span>
+              </th>
+              <th data-sort-key="age" data-test="header-age">
+                Age
+                <span class="sort-indicator" data-test="sort-indicator-age">↕</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            {% for user in users %}
+              <tr class="data-row" data-test="table-row">
+                <td data-field="name">{{ user.name }}</td>
+                <td data-field="email">{{ user.email }}</td>
+                <td data-field="role">{{ user.role }}</td>
+                <td data-field="age">{{ user.age }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById("tableSearch");
+      const tbody = document.getElementById("usersTableBody");
+      const headers = document.querySelectorAll(".data-table th");
+
+      let currentSort = {
+        key: null,
+        direction: "asc", // or "desc"
+      };
+
+      function getRowsArray() {
+        return Array.from(tbody.querySelectorAll("tr.data-row"));
+      }
+
+      function applySearchFilter() {
+        const term = searchInput.value.toLowerCase().trim();
+        const rows = getRowsArray();
+
+        rows.forEach(row => {
+          const name = row.querySelector('[data-field="name"]').textContent.toLowerCase();
+          const email = row.querySelector('[data-field="email"]').textContent.toLowerCase();
+          if (name.includes(term) || email.includes(term)) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        });
+      }
+
+      function sortBy(key) {
+        const rows = getRowsArray();
+
+        if (currentSort.key === key) {
+          // toggle direction
+          currentSort.direction = currentSort.direction === "asc" ? "desc" : "asc";
+        } else {
+          currentSort.key = key;
+          currentSort.direction = "asc";
+        }
+
+        rows.sort((a, b) => {
+          const aVal = a.querySelector(`[data-field="${key}"]`).textContent.trim();
+          const bVal = b.querySelector(`[data-field="${key}"]`).textContent.trim();
+
+          let comparison = 0;
+          if (key === "age") {
+            comparison = Number(aVal) - Number(bVal);
+          } else {
+            comparison = aVal.localeCompare(bVal);
+          }
+
+          return currentSort.direction === "asc" ? comparison : -comparison;
+        });
+
+        // Re-append rows in new order
+        rows.forEach(row => tbody.appendChild(row));
+      }
+
+      headers.forEach(header => {
+        const sortKey = header.getAttribute("data-sort-key");
+        if (!sortKey) return;
+        header.style.cursor = "pointer";
+        header.addEventListener("click", function () {
+          sortBy(sortKey);
+        });
+      });
+
+      searchInput.addEventListener("input", applySearchFilter);
+    });
+  </script>
+</body>
+</html>

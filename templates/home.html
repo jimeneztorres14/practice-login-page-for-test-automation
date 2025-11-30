@@ -7,101 +7,153 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 <body>
+
   <main class="container">
     <h1 class="page-title">Test Automation Playground</h1>
+
     <section class="card">
       <p>
-        Welcome! This project is a small playground inspired by
-        <em>the-internet</em> where you can practice UI test automation
-        with Selenium and Java.
+        Welcome! This project is a mini playground inspired by <strong>the-internet</strong>,
+        designed to help you practice UI test automation using Selenium &amp; Java.
       </p>
+
       <p class="hint">
-        Use the cards below to open individual test pages. Each page is focused
-        on a specific type of UI interaction (login, checkboxes, etc.) and can
-        be automated independently.
+        Click any card below to open an interactive test page. Each one focuses
+        on a common UI automation scenario.
       </p>
 
       <div class="grid">
 
-        <!-- Login page -->
+        <!-- Form Validation (COMING SOON until we add i) -->
+        <article class="nav-card" data-test="nav-form-validation">
+          <div>
+            <h2>Form Validation</h2>
+            <span class="tag">Coming Soon</span>
+            <p>
+              Full form with required fields, email/phone validation, and negative tests.
+            </p>
+          </div>
+          <span class="nav-link-btn" style="background: #9ca3af; cursor: default;">
+            Coming Soon
+          </span>
+        </article>
+
+        <!-- Login Page -->
         <article class="nav-card" data-test="nav-login">
           <div>
             <h2>Login Page</h2>
             <span class="tag">Authentication</span>
             <p>
-              Classic username/password login form with positive and negative
-              scenarios, error messages, and a protected success page.
+              Classic login flow with valid &amp; invalid tests, error messages,
+              and a protected secure page.
             </p>
           </div>
-          <a
-            href="{{ url_for('login') }}"
-            class="nav-link-btn"
-          >
-            Go to Login page
+          <a href="{{ url_for('login') }}" class="nav-link-btn">
+            Go to Login Page
           </a>
         </article>
 
-        <!-- Checkboxes & radios page -->
+        <!-- Checkboxes & Radios -->
         <article class="nav-card" data-test="nav-checkboxes">
           <div>
             <h2>Checkboxes &amp; Radio Buttons</h2>
-            <span class="tag">Form controls</span>
+            <span class="tag">Form Controls</span>
             <p>
-              Practice selecting and unselecting checkboxes, working with radio
-              groups, and verifying UI state in your automated tests.
+              Practice toggling checkboxes, selecting radio groups, and verifying UI state.
             </p>
           </div>
-          <a
-            href="{{ url_for('checkboxes') }}"
-            class="nav-link-btn"
-          >
-            Go to Checkboxes page
+          <a href="{{ url_for('checkboxes') }}" class="nav-link-btn">
+            Go to Checkboxes Page
           </a>
         </article>
 
+        <!-- Dynamic Loading -->
         <article class="nav-card" data-test="nav-dynamic-loading">
           <div>
             <h2>Dynamic Loading</h2>
             <span class="tag">Waits</span>
             <p>
-              Content appears after a delay. Perfect for practicing explicit waits.
+              Button-triggered delayed content, perfect for practicing explicit waits.
             </p>
           </div>
           <a href="{{ url_for('dynamic_loading') }}" class="nav-link-btn">
-            Go to Dynamic Loading
+            Go to Dynamic Loading Page
           </a>
         </article>
 
+        <!-- File Upload -->
         <article class="nav-card" data-test="nav-file-upload">
           <div>
             <h2>File Upload</h2>
             <span class="tag">Files</span>
             <p>
-              Upload a file and verify success or validation errors.
+              Use this page to practice uploading files and validating file types.
             </p>
           </div>
           <a href="{{ url_for('file_upload') }}" class="nav-link-btn">
-            Go to File Upload
+            Go to File Upload Page
           </a>
         </article>
 
-        <!-- Placeholder cards for future pages -->
+        <!-- Alerts & Modals -->
         <article class="nav-card" data-test="nav-alerts">
           <div>
             <h2>Alerts &amp; Modals</h2>
-            <span class="tag">Coming soon</span>
+            <span class="tag">Popups</span>
             <p>
-              JavaScript alerts, confirms, prompts, and modals for practicing
-              window/alert handling.
+              JavaScript alerts, confirms, prompts, and custom modals for testing dialog handling.
             </p>
           </div>
-          <span class="nav-link-btn" style="background:#9ca3af; cursor:default;">
-            Coming soon
+          <a href="{{ url_for('alerts') }}" class="nav-link-btn">
+            Go to Alerts &amp; Modals
+          </a>
+        </article>
+
+        <!-- Sortable/Searchable Table -->
+        <article class="nav-card" data-test="nav-tables">
+          <div>
+            <h2>Sortable Table</h2>
+            <span class="tag">Data</span>
+            <p>
+              Sort rows by columns and filter with the search bar. Great for list &amp; DOM validation tests.
+            </p>
+          </div>
+          <a href="{{ url_for('tables') }}" class="nav-link-btn">
+            Go to Table Page
+          </a>
+        </article>
+
+        <!-- Iframe Interaction -->
+        <article class="nav-card" data-test="nav-iframe">
+          <div>
+            <h2>Iframe Interaction</h2>
+            <span class="tag">Frames</span>
+            <p>
+              Switch into iframe → interact → switch out. A must-know Selenium skill.
+            </p>
+          </div>
+          <a href="{{ url_for('iframe') }}" class="nav-link-btn">
+            Go to Iframe Page
+          </a>
+        </article>
+
+        <!-- Hover / Mouse Actions (COMING SOON) -->
+        <article class="nav-card" data-test="nav-hover">
+          <div>
+            <h2>Hover &amp; Mouse Actions</h2>
+            <span class="tag">Coming Soon</span>
+            <p>
+              Hover to reveal text, tooltips, and advanced mouse actions.
+            </p>
+          </div>
+          <span class="nav-link-btn" style="background: #9ca3af; cursor: default;">
+            Coming Soon
           </span>
         </article>
 
       </div>
     </section>
   </main>
+
 </body>
 </html>

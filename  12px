@@ -1,0 +1,41 @@
+[33mcommit 7a16edc47be8ad00fe2558504f522545c9b10aab[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Your Name <rubenjimenez9412@gmail.com>
+Date:   Fri Nov 28 19:09:20 2025 -0600
+
+    Add File_upload and Dynamic_loading Page
+
+[33mcommit 1b81d4b7161061e8084bb783a18ba43267cc3389[m
+Author: Your Name <rubenjimenez9412@gmail.com>
+Date:   Thu Nov 27 19:00:30 2025 -0600
+
+    Add a new home page and update CSS file
+
+[33mcommit ed7fa39201f4b12ecfe405f400af9477e138edfa[m
+Author: Your Name <rubenjimenez9412@gmail.com>
+Date:   Tue Nov 25 20:26:37 2025 -0600
+
+    CheckBoxes Page
+
+[33mcommit b8f06f2da749753ef74f92d4f5e68fc62fb0805c[m
+Author: Your Name <rubenjimenez9412@gmail.com>
+Date:   Mon Sep 1 21:31:33 2025 -0500
+
+    Create requirements for deployment
+
+[33mcommit d6d3b83633203ca6b1ffb5d3269690af36649608[m
+Author: Your Name <rubenjimenez9412@gmail.com>
+Date:   Mon Sep 1 20:34:50 2025 -0500
+
+    Update app.py for to fix deployment issue
+
+[33mcommit 97c13e565a37dfda6d24e9eeb0580f39801dd821[m
+Author: Your Name <rubenjimenez9412@gmail.com>
+Date:   Mon Sep 1 19:53:08 2025 -0500
+
+    Update log in page for Testing Automation
+
+[33mcommit 379c918a865eaf8b504330cb9fb024c877d83570[m
+Author: Your Name <rubenjimenez9412@gmail.com>
+Date:   Sun Aug 31 18:29:33 2025 -0500
+
+    Initial commit of practice test login page

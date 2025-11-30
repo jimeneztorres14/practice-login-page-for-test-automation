@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alerts &amp; Modals | Test Automation Playground</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+    <h1 class="page-title">Alerts &amp; Modals</h1>
+
+    <section class="card">
+      <p>
+        This page provides JavaScript alerts, confirms, prompts, and a custom
+        modal dialog so you can practice alert and window handling in Selenium.
+      </p>
+
+      <div class="alerts-grid">
+        <div class="alerts-column">
+          <h2>JavaScript Alerts</h2>
+
+          <button
+            id="simpleAlertBtn"
+            type="button"
+            data-test="simple-alert-button"
+          >
+            Show alert
+          </button>
+
+          <button
+            id="confirmAlertBtn"
+            type="button"
+            data-test="confirm-alert-button"
+          >
+            Show confirm
+          </button>
+
+          <button
+            id="promptAlertBtn"
+            type="button"
+            data-test="prompt-alert-button"
+          >
+            Show prompt
+          </button>
+        </div>
+
+        <div class="alerts-column">
+          <h2>Custom Modal</h2>
+
+          <button
+            id="openModalBtn"
+            type="button"
+            data-test="open-modal-button"
+          >
+            Open modal
+          </button>
+        </div>
+      </div>
+
+      <div class="alerts-result">
+        <p><strong>Result:</strong></p>
+        <p id="alertResult" data-test="alert-result">
+          No actions yet.
+        </p>
+      </div>
+    </section>
+
+    <!-- Back button -->
+    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">
+      ← Back to Home
+    </a>
+
+    <!-- Modal markup -->
+    <div
+      id="modalOverlay"
+      class="modal-overlay"
+      data-test="modal-overlay"
+      style="display: none;"
+    >
+      <div class="modal" role="dialog" aria-modal="true">
+        <h2 class="modal-title">Example Modal</h2>
+        <p class="modal-body">
+          This is a custom HTML modal. Use it to practice switching focus
+          and verifying dialog content in your automated tests.
+        </p>
+        <button
+          id="closeModalBtn"
+          type="button"
+          class="modal-close-btn"
+          data-test="modal-close-button"
+        >
+          Close modal
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const result = document.getElementById("alertResult");
+
+      // Simple alert
+      document.getElementById("simpleAlertBtn").addEventListener("click", function () {
+        alert("This is a simple alert.");
+        result.textContent = "Simple alert was shown and accepted.";
+      });
+
+      // Confirm alert
+      document.getElementById("confirmAlertBtn").addEventListener("click", function () {
+        const accepted = confirm("Do you confirm this action?");
+        if (accepted) {
+          result.textContent = "Confirm alert was accepted.";
+        } else {
+          result.textContent = "Confirm alert was dismissed.";
+        }
+      });
+
+      // Prompt alert
+      document.getElementById("promptAlertBtn").addEventListener("click", function () {
+        const name = prompt("What is your name?", "Student");
+        if (name === null) {
+          result.textContent = "Prompt alert was dismissed.";
+        } else {
+          result.textContent = "Prompt alert input: " + name;
+        }
+      });
+
+      // Modal logic
+      const overlay = document.getElementById("modalOverlay");
+      const openModalBtn = document.getElementById("openModalBtn");
+      const closeModalBtn = document.getElementById("closeModalBtn");
+
+      openModalBtn.addEventListener("click", function () {
+        overlay.style.display = "flex";
+      });
+
+      closeModalBtn.addEventListener("click", function () {
+        overlay.style.display = "none";
+        result.textContent = "Modal was closed.";
+      });
+
+      // Optional: click outside modal to close
+      overlay.addEventListener("click", function (event) {
+        if (event.target === overlay) {
+          overlay.style.display = "none";
+          result.textContent = "Modal was closed by clicking outside.";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

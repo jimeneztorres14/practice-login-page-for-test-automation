@@ -80,6 +80,27 @@ def file_upload():
         filename=filename,
     )
 
+@app.route("/alerts/")
+def alerts():
+    return render_template("alerts.html")
+
+@app.route("/tables/")
+def tables():
+    # Simple sample data to render in the table
+    users = [
+        {"name": "Alice Johnson", "email": "alice@example.com", "role": "Admin", "age": 34},
+        {"name": "Bob Smith", "email": "bob@example.com", "role": "User", "age": 27},
+        {"name": "Charlie Brown", "email": "charlie@example.com", "role": "Manager", "age": 41},
+        {"name": "Diana Prince", "email": "diana@example.com", "role": "User", "age": 29},
+        {"name": "Ethan Clark", "email": "ethan@example.com", "role": "Support", "age": 25},
+    ]
+    return render_template("tables.html", users=users)
+
+@app.route("/iframe/")
+def iframe():
+    return render_template("iframe.html")
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     app.run(host="0.0.0.0", port=port, debug=False)
