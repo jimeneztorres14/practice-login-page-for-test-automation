@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from werkzeug.utils import secure_filename
 from datetime import timedelta, datetime
 import os
+import re
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "pta-clone-demo-secret")
@@ -24,6 +25,22 @@ def form_validation():
     errors = {}
     success_message = None
 
+    # Validation rules
+    NAME_MIN = 2
+    NAME_MAX = 50
+    PHONE_MIN = 10
+    PHONE_MAX = 15
+    PASSWORD_MIN = 8
+
+    # Allow letters + spaces + hyphen + apostrophe (e.g., O'Neil, Ana-Maria)
+    NAME_REGEX = re.compile(r"^[A-Za-z][A-Za-z\s'-]*[A-Za-z]$")
+
+    # Basic email check (better than "@ and .", still simple)
+    EMAIL_REGEX = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
+
+    # Common typo domains you can flag (optional but great for tests)
+    BLOCKED_DOMAINS = {"gamil.com", "gnail.com", "hotnail.com", "yaho.com"}
+
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         email = request.form.get("email", "").strip()
@@ -31,39 +48,65 @@ def form_validation():
         password = request.form.get("password", "")
         confirm_password = request.form.get("confirm_password", "")
 
-        # Name validation
+        # NAME
         if not name:
-            errors["name"] = "Name is required."
+            errors["name"] = "Full Name is required."
+        elif len(name) < NAME_MIN:
+            errors["name"] = f"Full Name must be at least {NAME_MIN} characters."
+        elif len(name) > NAME_MAX:
+            errors["name"] = f"Full Name must be {NAME_MAX} characters or fewer."
+        elif not NAME_REGEX.match(name):
+            errors["name"] = "Full Name can contain letters, spaces, hyphens (-), and apostrophes (') only."
 
-        # Email validation
+        # EMAIL
         if not email:
             errors["email"] = "Email is required."
-        elif "@" not in email or "." not in email:
-            errors["email"] = "Enter a valid email address."
+        elif len(email) > 254:
+            errors["email"] = "Email is too long."
+        elif not EMAIL_REGEX.match(email):
+            errors["email"] = "Enter a valid email address (example: name@email.com)."
+        else:
+            domain = email.split("@")[-1].lower()
+            if domain in BLOCKED_DOMAINS:
+                errors["email"] = f"Did you mean {email.replace(domain, 'gmail.com')}?"
 
-        # Phone validation (simple numeric check)
+        # PHONE
         if not phone:
-            errors["phone"] = "Phone number is required."
+            errors["phone"] = "Phone Number is required."
         elif not phone.isdigit():
-            errors["phone"] = "Phone number must contain only digits."
+            errors["phone"] = "Phone Number must contain digits only (no spaces, dashes, or symbols)."
+        elif len(phone) < PHONE_MIN:
+            errors["phone"] = f"Phone Number must be at least {PHONE_MIN} digits."
+        elif len(phone) > PHONE_MAX:
+            errors["phone"] = f"Phone Number must be {PHONE_MAX} digits or fewer."
 
-        # Password validation
-        if len(password) < 8:
-            errors["password"] = "Password must be at least 8 characters long."
+        # PASSWORD
+        if not password:
+            errors["password"] = "Password is required."
+        elif len(password) < PASSWORD_MIN:
+            errors["password"] = f"Password must be at least {PASSWORD_MIN} characters long."
+        elif not any(c.isupper() for c in password):
+            errors["password"] = "Password must include at least 1 uppercase letter."
+        elif not any(c.islower() for c in password):
+            errors["password"] = "Password must include at least 1 lowercase letter."
+        elif not any(c.isdigit() for c in password):
+            errors["password"] = "Password must include at least 1 number."
 
-        # Confirm password
-        if password != confirm_password:
+        # CONFIRM PASSWORD
+        if not confirm_password:
+            errors["confirm_password"] = "Confirm Password is required."
+        elif password and (password != confirm_password):
             errors["confirm_password"] = "Passwords do not match."
 
-        # If no errors → success
         if not errors:
             success_message = "Form submitted successfully!"
-    
+
     return render_template(
         "form_validation.html",
         errors=errors,
-        success_message=success_message
+        success_message=success_message,
     )
+
 
 @app.route("/practice-test-login/", methods=["GET", "POST"])
 def login():
