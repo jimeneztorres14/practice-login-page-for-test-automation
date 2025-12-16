@@ -110,19 +110,35 @@ def form_validation():
 
 @app.route("/practice-test-login/", methods=["GET", "POST"])
 def login():
-    error = None
+    error_general = None
+    error_username = None
+    error_password = None
+
     if request.method == "POST":
-        username = request.form.get("username", "")
+        username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
-        if username != VALID_USERNAME:
-            error = "Your username is invalid!"
-        elif password != VALID_PASSWORD:
-            error = "Your password is invalid!"
-        else:
-            session["logged_in"] = True
-            session["username"] = username
-            return redirect(url_for("logged_in_successfully"))
-    return render_template("login.html", error=error)
+
+        if not username:
+            error_username = "Username is required."
+        if not password:
+            error_password = "Password is required."
+
+        if not error_username and not error_password:
+            if username != VALID_USERNAME:
+                error_general = "Your username is invalid!"
+            elif password != VALID_PASSWORD:
+                error_general = "Your password is invalid!"
+            else:
+                session["logged_in"] = True
+                session["username"] = username
+                return redirect(url_for("logged_in_successfully"))
+
+    return render_template(
+        "login.html",
+        error_general=error_general,
+        error_username=error_username,
+        error_password=error_password,
+    )
 
 @app.route("/logged-in-successfully/")
 def logged_in_successfully():

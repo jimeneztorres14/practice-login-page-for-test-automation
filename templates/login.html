@@ -1,75 +1,75 @@
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Test Login | Practice Test Automation (Clone)</title>
+  <title>Test Login Page | Test Automation Playground</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
+
 <body>
   <main class="container">
-    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">← Back to Home</a>
-    <h1 class="page-title">Test Login Page</h1>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <div id="flash" class="flash">
-          {% for category, message in messages %}
-            <p class="flash-{{category}}">{{ message }}</p>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
+
+    <a href="{{ url_for('home') }}" class="back-btn" data-test="back-button">
+      ← Back to Home
+    </a>
+
+    <h1 class="page-title">Test Login</h1>
+
     <section class="card">
-      <form id="loginForm" method="post" action="" novalidate>
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text" autocomplete="username" required data-test="username-input" />
+      <p>
+        This is a simple Login page. Students can use this page to practice writing simple
+        positive and negative Login tests. Login functionality is something that most test
+        automation engineers need to automate.
+      </p>
 
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" autocomplete="current-password" required data-test="password-input" />
+      <p class="hint">
+        Use next credentials to execute Login:<br />
+        <strong>Username:</strong> <span data-test="valid-username">student</span><br />
+        <strong>Password:</strong> <span data-test="valid-password">Password123</span>
+      </p>
 
-        <button id="submit" type="submit" data-test="login-button">Submit</button>
-
-        {% if error %}
-          <div id="error" class="error" role="alert" data-test="error-message">{{ error }}</div>
+      <div id="errors">
+        {% if error_username %}
+          <div class="error" role="alert" data-test="error-username">{{ error_username }}</div>
         {% endif %}
-      </form>
 
-      <div class="hint">
-        <br>
-        <hr>
-        <p><strong>Test case 1: Positive LogIn test</strong></p>
-        <ul>
-          <li>Open page</li>
-          <li>Type username <strong>student</strong> into Username field</li>
-          <li>Type password <strong>Password123</strong> into Password field</li>
-          <li>Push <strong>Submit</strong> button</li>
-          <li>Verify new page URL contains <strong>practicetestautomation.com/logged-in-successfully/</strong></li>
-          <li>Verify new page contains expected text (<code>'Congratulations'</code> or <code>'Successfully' logged in</code>)</li>
-          <li>Verify button <strong>Log out</strong> is displayed on the new page</li>
-        </ul>
-        <hr>
-        <p><strong>Test case 2: Negative username test</strong></p>
-        <ul>
-          <li>Open page</li>
-          <li>Type username <code>incorrectUser</code> into <strong>Username</strong> field</li>
-          <li>Type password <code>Password123</code> into <strong>Password</strong> field</li>
-          <li>Push <strong>Submit</strong> button</li>
-          <li>Verify error message is displayed</li>
-          <li>Verify error message text is <strong>Your username is invalid!</strong></li>
-        </ul>
-        <hr>
-        <p><strong>Test case 3: Negative password test</strong></p>
-        <ul>
-          <li>Open page</li>
-          <li>Type username <code>student</code> into <strong>Username</strong> field</li>
-          <li>Type password <code>incorrectPassword</code> into <strong>Password</strong> field</li>
-          <li>Push <strong>Submit</strong> button</li>
-          <li>Verify error message is displayed</li>
-          <li>Verify error message text is <strong>Your password is invalid!</strong></li>
-        </ul>
+        {% if error_password %}
+          <div class="error" role="alert" data-test="error-password">{{ error_password }}</div>
+        {% endif %}
+
+        {% if error_general %}
+          <div class="error" role="alert" data-test="error-message">{{ error_general }}</div>
+        {% endif %}
       </div>
+
+      <form id="loginForm" method="post" action="{{ url_for('login') }}" novalidate>
+        <label for="username"><strong>Username</strong></label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter username"
+          data-test="username-input"
+          autocomplete="username"
+        />
+
+        <label for="password" style="margin-top: 1rem;"><strong>Password</strong></label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter password"
+          data-test="password-input"
+          autocomplete="current-password"
+        />
+
+        <button type="submit" data-test="submit-button" style="margin-top: 1.25rem;">
+          Submit
+        </button>
+      </form>
     </section>
+
   </main>
 </body>
 </html>
